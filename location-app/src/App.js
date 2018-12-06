@@ -10,7 +10,6 @@ class App extends Component {
 componentDidMount(){
   // {invoke functions}
   this.getVenues()
-  this.renderMap()
 }
 
 renderMap = () => {
@@ -32,9 +31,10 @@ getVenues = () => {
   axios.get(endPoint + new URLSearchParams(parameters))
   .then(response => {
     this.setState({
-    venues:response.data.response.groups[0].items
-    })
-    console.log(response);    
+    venues:response.data.response.groups[0].items},
+    this.renderMap()
+    )
+    console.log(response);
   })
   .catch(error => {
     console.log("Error !!!" + error);
@@ -47,8 +47,17 @@ initMap = () => {
     // {here we define google by adding window.}
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
-        });
-      }
+        })
+
+  this.state.venues.map(myvenue => {
+      var marker = new window.google.maps.Marker({
+        position:{lat:myvenue.venue.location.lat,
+        lng:myvenue.venue.location.lng},
+        map: map
+        })
+     return marker;
+   })
+  }
 
   render() {
     return (
