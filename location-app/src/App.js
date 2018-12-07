@@ -53,7 +53,8 @@ initMap = () => {
       var marker = new window.google.maps.Marker({
         position:{lat:myvenue.venue.location.lat,
         lng:myvenue.venue.location.lng},
-        map: map
+        map: map,
+        title:myvenue.venue.name 
       });
         return marker;
    })
