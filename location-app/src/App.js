@@ -24,7 +24,7 @@ getVenues = () => {
   let parameters = {
     client_id:"S0KNYX5Z2ZEWDS5BQ0D5H5OMLXYFXH3HYEJG1K1QVPEPWXHA",
     client_secret:"G3B1FVXX3CUS4SGJKHZP452F43WNOUSM1OFMFNJC5WWQFHBQ",
-    near:"Abuja" ,
+    near:"Sydney",
     query:"food",
     v:"20180725"
   }
@@ -54,8 +54,8 @@ initMap = () => {
         position:{lat:myvenue.venue.location.lat,
         lng:myvenue.venue.location.lng},
         map: map
-        })
-     return marker;
+      });
+        return marker;
    })
   }
 
