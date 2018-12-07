@@ -3,11 +3,13 @@ import './App.css';
 import axios from 'axios';
 
 class App extends Component {
+  state = {
+    venues: []
+  }
 
 componentDidMount(){
   // {invoke functions}
   this.getVenues()
-  this.renderMap()
 }
 
 renderMap = () => {
@@ -22,13 +24,17 @@ getVenues = () => {
   let parameters = {
     client_id:"S0KNYX5Z2ZEWDS5BQ0D5H5OMLXYFXH3HYEJG1K1QVPEPWXHA",
     client_secret:"G3B1FVXX3CUS4SGJKHZP452F43WNOUSM1OFMFNJC5WWQFHBQ",
-    near:"Abuja" ,
+    near:"Sydney",
     query:"food",
     v:"20180725"
   }
   axios.get(endPoint + new URLSearchParams(parameters))
   .then(response => {
-    console.log(response)
+    this.setState({
+    venues:response.data.response.groups[0].items},
+    this.renderMap()
+    )
+    console.log(response);
   })
   .catch(error => {
     console.log("Error !!!" + error);
@@ -41,8 +47,17 @@ initMap = () => {
     // {here we define google by adding window.}
           center: {lat: -34.397, lng: 150.644},
           zoom: 8
-        });
-      }
+        })
+
+  this.state.venues.map(myvenue => {
+      var marker = new window.google.maps.Marker({
+        position:{lat:myvenue.venue.location.lat,
+        lng:myvenue.venue.location.lng},
+        map: map
+      });
+        return marker;
+   })
+  }
 
   render() {
     return (
