@@ -24,7 +24,7 @@ getVenues = () => {
   let parameters = {
     client_id:"S0KNYX5Z2ZEWDS5BQ0D5H5OMLXYFXH3HYEJG1K1QVPEPWXHA",
     client_secret:"G3B1FVXX3CUS4SGJKHZP452F43WNOUSM1OFMFNJC5WWQFHBQ",
-    near:"Sydney",
+    near:"Abuja",
     query:"food",
     v:"20180725"
   }
@@ -40,23 +40,34 @@ getVenues = () => {
     console.log("Error !!!" + error);
   })
 }
-
 // {initmap function copied from google maps api}
 initMap = () => {
+  // {here we define google by adding window.}
   let map = new window.google.maps.Map(document.getElementById('map'), {
-    // {here we define google by adding window.}
-          center: {lat: -34.397, lng: 150.644},
+          center: {lat: 9.072264, lng: 7.491302},
           zoom: 8
         })
+// {create infowindow}
+  let infowindow = new window.google.maps.InfoWindow();
 
   this.state.venues.map(myvenue => {
-      var marker = new window.google.maps.Marker({
+    let contentString = `${myvenue.venue.name}`
+
+// {create a marker}
+      let marker = new window.google.maps.Marker({
         position:{lat:myvenue.venue.location.lat,
         lng:myvenue.venue.location.lng},
         map: map,
         title:myvenue.venue.name 
       });
-        return marker;
+
+      marker.addListener('click', function() {
+        // change content
+        infowindow.setContent(contentString)
+        // {open infowindow}
+        infowindow.open(map, marker);
+ });
+ return marker;
    })
   }
 
