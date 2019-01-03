@@ -8,17 +8,14 @@ class App extends Component {
   }
 
 componentDidMount(){
-  // {invoke functions}
   this.getVenues()
 }
 
 renderMap = () => {
   loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCgugNkUxQKbCvivBo5_f8piPwxHINF3DM&callback=initMap")
-  // {convert initmap to a window object}
   window.initMap = this.initMap
 }
 
-// {create a for to fetch venue apis}
 getVenues = () => {
   let endPoint = "https://api.foursquare.com/v2/venues/explore?"
   let parameters = {
@@ -40,31 +37,26 @@ getVenues = () => {
     console.log("Error !!!" + error);
   })
 }
-// {initmap function copied from google maps api}
+
 initMap = () => {
-  // {here we define google by adding window.}
   let map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: 9.072264, lng: 7.491302},
           zoom: 8
         })
-// {create infowindow}
+
   let infowindow = new window.google.maps.InfoWindow();
 
   this.state.venues.map(myvenue => {
     let contentString = `${myvenue.venue.name}`
-
-// {create a marker}
       let marker = new window.google.maps.Marker({
         position:{lat:myvenue.venue.location.lat,
         lng:myvenue.venue.location.lng},
         map: map,
-        title: myvenue.venue.name
+        title:myvenue.venue.name
       });
 
       marker.addListener('click', function() {
-        // change content
         infowindow.setContent(contentString)
-        // {open infowindow}
         infowindow.open(map, marker);
  });
  return marker;
@@ -80,7 +72,6 @@ initMap = () => {
   }
 }
 
-// {define a loadscript function to load script tag}
 function loadScript (url){
   let index = window.document.getElementsByTagName('script')[0]
   let script = window.document.createElement('script')
