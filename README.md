@@ -2,8 +2,8 @@
 This single page application shows a map of Bars & Restaurant near Abuja, Nigeria. This app is built for a Neighbourhood map project which is a part of the Front End Web Development Nanodegree at Udacity in to demonstrate a good understanding of: javascript, reactJS, API usage, HTML, CSS, responsive design, and front-end web development in general
 
 ## APIs used
-Google Maps
-Foursquare
+- Google Maps APIs
+- Foursquare  APIs
 
 ## How to run
 Make sure that you have Node.js installed on your device and then clone the repository. Navigate to the directory that contains the project in your terminal and type.
