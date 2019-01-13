@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import { FlatList } from 'react-native';
+import { List,ListItem } from 'react-native-elements';
 
 class App extends Component {
   state = {
@@ -38,13 +40,14 @@ getVenues = () => {
   })
 }
 
+
 initMap = () => {
   let map = new window.google.maps.Map(document.getElementById('map'), {
           center: {lat: 9.072264, lng: 7.491302},
           zoom: 8
         })
 
-  let infowindow = new window.google.maps.InfoWindow();
+let infowindow = new window.google.maps.InfoWindow();
 
   this.state.venues.map(myvenue => {
     let contentString = `${myvenue.venue.name}`
@@ -52,7 +55,8 @@ initMap = () => {
         position:{lat:myvenue.venue.location.lat,
         lng:myvenue.venue.location.lng},
         map: map,
-        title:myvenue.venue.name
+        title:myvenue.venue.name,
+        animation: window.google.maps.Animation.DROP
       });
 
       marker.addListener('click', function() {
@@ -66,7 +70,19 @@ initMap = () => {
   render() {
     return (
       <main >
-        <div id="map"></div>
+        <div id="map">
+         <List>
+            <FlatList
+             data={this.state.venues}
+             renderItem={({item})=>(
+               <ListItem
+               title={`${item.name}`}
+               />
+             )}
+             keyExtractor={item=>item.id}
+            />
+         </List>
+        </div>
       </main>
     );
   }
