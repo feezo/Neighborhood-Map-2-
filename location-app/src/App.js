@@ -4,7 +4,8 @@ import axios from 'axios';
 
 class App extends Component {
   state = {
-    venues: []
+    venues: [],
+    loading: true
   }
 
 componentDidMount(){
@@ -64,10 +65,32 @@ initMap = () => {
   }
 
   render() {
+    if(!this.state.loading){
+      return (
+        <div> Loading .... </div>
+      )
+    }
+     if(!this.state.venues.length){
+      return (
+        <div> Sorry didn't get a venue </div>
+      )
+    }
+
     return (
-      <main >
-        <div id="map"></div>
-      </main>
+      <div id="map">
+      {
+        this.state.venues.map(venue => {
+        return(
+        <li key={venue.id}>
+           {venue.name}
+           {venue.location}
+        </li>
+        )
+        })
+      }
+        )
+        </div>
+
     );
   }
 }
