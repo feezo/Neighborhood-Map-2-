@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import Venue from './Venue.js'
 
 class App extends Component {
   state = {
@@ -76,21 +77,19 @@ initMap = () => {
       )
     }
 
+    var venueList = this.state.venues.map(item =>
+      <Venue
+       key={item.venue.id}
+       name={item.venue.name}
+       />
+    );
+
     return (
       <div id="map">
-      {
-        this.state.venues.map(venue => {
-        return(
-        <li key={venue.id}>
-           {venue.name}
-           {venue.location}
-        </li>
-        )
-        })
-      }
-        )
-        </div>
-
+       <ul>
+        {venueList}
+       </ul>
+      </div>
     );
   }
 }
