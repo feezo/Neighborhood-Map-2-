@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import Venue from './Venue.js'
+import { Search } from './Search'
 
 class App extends Component {
   state = {
@@ -13,12 +14,16 @@ componentDidMount(){
   this.getVenues()
 }
 
+handleSubmit(query) {
+  this.getVenues(query);
+}
+
 renderMap = () => {
   loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyCgugNkUxQKbCvivBo5_f8piPwxHINF3DM&callback=initMap")
   window.initMap = this.initMap
 }
 
-getVenues = () => {
+getVenues = (query) => {
   let endPoint = "https://api.foursquare.com/v2/venues/explore?"
   let parameters = {
     client_id:"S0KNYX5Z2ZEWDS5BQ0D5H5OMLXYFXH3HYEJG1K1QVPEPWXHA",
@@ -77,7 +82,7 @@ initMap = () => {
       )
     }
 
-    var venueList = this.state.venues.map(item =>
+    const venueList = this.state.venues.map(item =>
       <Venue
        key={item.venue.id}
        name={item.venue.name}
@@ -86,6 +91,7 @@ initMap = () => {
 
     return (
       <div id="map">
+       <Search onSubmit={(value)=>this.handleSubmit(value)}/>
        <ul>
         {venueList}
        </ul>

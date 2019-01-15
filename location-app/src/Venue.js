@@ -1,15 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-class Venue extends Component { // Make sure we export!
-
-  render() {
-    return(
-      <li>{this.props.name}</li>
-    )
-
-  }
-
-}
+const Venue = ({ name }) => <li>{name}</li>; // Make sure we export!
 
 export default Venue;
