@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { FlatList } from 'react-native';
-import { List,ListItem } from 'react-native-elements';
+
 
 class App extends Component {
   state = {
