@@ -93,30 +93,12 @@ let infowindow = new window.google.maps.InfoWindow();
     );
 
     return (
-<<<<<<< HEAD
-      <main >
-        <div id="map">
-         <List>
-            <FlatList
-             data={this.state.venues}
-             renderItem={({item})=>(
-               <ListItem
-               title={`${item.name}`}
-               />
-             )}
-             keyExtractor={item=>item.id}
-            />
-         </List>
-        </div>
-      </main>
-=======
       <div id="map">
        <Search onSubmit={(value)=>this.handleSubmit(value)}/>
        <ul>
         {venueList}
        </ul>
       </div>
->>>>>>> caught
     );
   }
 }
