@@ -90,15 +90,19 @@ initMap = () => {
     );
 
     return (
-      <div id="map">
-       <Search onSubmit={(value)=>this.handleSubmit(value)}/>
-       <ul>
+      <main>
+        <div id="map">
+        </div>
+
+        <Search onSubmit={(value)=>this.handleSubmit(value)}/>
+        <ul>
         {venueList}
-       </ul>
-      </div>
-    );
+        </ul>
+      </main>
+      );
+    }
   }
-}
+
 
 function loadScript (url){
   let index = window.document.getElementsByTagName('script')[0]
